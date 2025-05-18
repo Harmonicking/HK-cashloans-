@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HK Cashloans Application</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      max-width: 500px;
+      margin: auto;
+    }
+    input, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to HK Cashloans</h1>
+  <p>Fill in the form below to apply for a loan.</p>
+  <form action="https://formsubmit.co/danielcasio35@gmail.com" method="POST">
+    <input type="hidden" name="_subject" value="New Loan Application!">
+    <input type="hidden" name="_captcha" value="false">
+
+    <label>Full Name:</label>
+    <input type="text" name="Full Name" required>
+
+    <label>Email Address:</label>
+    <input type="email" name="Email" required>
+
+    <label>Phone Number:</label>
+    <input type="tel" name="Phone" required>
+
+    <label>Loan Amount (HKD):</label>
+    <input type="number" name="Loan Amount" required>
+
+    <label>Reason for Loan:</label>
+    <textarea name="Reason" required></textarea>
+
+    <button type="submit">Apply Now</button>
+  </form>
+</body>
+</html>
