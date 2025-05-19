@@ -2,26 +2,107 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>HK Cashloans</title>
+  <title>HK Cashloans - Apply Now</title>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBtqbhpRy0syHeLIzIgrCLU0otMzrGDQws",
+      authDomain: "hk-cashloans.firebaseapp.com",
+      projectId: "hk-cashloans",
+      storageBucket: "hk-cashloans.firebasestorage.app",
+      messagingSenderId: "875050729218",
+      appId: "1:875050729218:web:11551a4a54f7bc2a950c1b"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    window.submitForm = async function () {
+      const form = document.getElementById("loan-form");
+      const data = Object.fromEntries(new FormData(form).entries());
+
+      try {
+        await addDoc(collection(db, "applications"), data);
+        alert("Application submitted successfully!");
+        form.reset();
+      } catch (error) {
+        console.error("Error submitting application: ", error);
+        alert("Submission failed.");
+      }
+    };
+  </script>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f8f9fa;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 2rem;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    .logo {
       text-align: center;
-      padding: 50px;
+      margin-bottom: 1rem;
     }
-    h1 {
-      color: #0070f3;
+    .logo img {
+      width: 200px;
     }
-    p {
-      font-size: 18px;
-      color: #333;
+    h2 {
+      color: #002b5c;
+      text-align: center;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 1rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    button {
+      background-color: #f7941d;
+      color: white;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #e68000;
     }
   </style>
 </head>
 <body>
-  <h1>Welcome to HK Cashloans</h1>
-  <p>Apply for fast and easy loans online. We'll get back to you shortly!</p>
+  <div class="container">
+    <div class="logo">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=" alt="HK Cashloans Logo" />
+    </div>
+    <h2>Loan Application Form</h2>
+    <form id="loan-form" onsubmit="event.preventDefault(); submitForm();">
+      <input name="name" placeholder="Full Name" required />
+      <input name="email" type="email" placeholder="Email" required />
+      <input name="phone" placeholder="Phone Number" required />
+      <input name="amount" type="number" placeholder="Loan Amount" required />
+      <select name="collateralType" required>
+        <option value="">Select Collateral Type</option>
+        <option>Real Estate</option>
+        <option>Vehicle</option>
+        <option>Savings Account</option>
+        <option>Jewelry</option>
+        <option>Business Assets</option>
+        <option>Other</option>
+      </select>
+      <input name="collateralDescription" placeholder="Collateral Description" required />
+      <input name="collateralValue" type="number" placeholder="Estimated Collateral Value" required />
+      <button type="submit">Submit Application</button>
+    </form>
+  </div>
 </body>
 </html>
