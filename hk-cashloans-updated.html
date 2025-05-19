@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HK Cashloans</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: #0B3D91;
+    }
+    header img {
+      height: 50px;
+    }
+    .container {
+      max-width: 400px;
+      margin: 50px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #0B3D91;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #F7941D;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background-color: #e9830a;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="HK Cashloans Logo">
+  </header>
+
+  <div class="container">
+    <h2>Loan Application Form</h2>
+    <form action="https://formspree.io/f/your-id" method="POST">
+      <input type="text" name="name" placeholder="Full Name" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="tel" name="phone" placeholder="Phone Number" required>
+      <input type="number" name="amount" placeholder="Loan Amount" required>
+      <select name="collateralType" required>
+        <option value="">Select Collateral Type</option>
+        <option value="Vehicle">Vehicle</option>
+        <option value="Property">Property</option>
+        <option value="Electronics">Electronics</option>
+        <option value="Other">Other</option>
+      </select>
+      <input type="text" name="collateralDesc" placeholder="Collateral Description">
+      <input type="text" name="collateralValue" placeholder="Estimated Collateral Value">
+      <button type="submit">Submit Application</button>
+    </form>
+  </div>
+</body>
+</html>
