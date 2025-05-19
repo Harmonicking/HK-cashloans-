@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HK Cashloans - Loan Application</title>
+  <script type="module">
+    // Firebase SDK
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBtqbhpRy0syHeLIzIgrCLU0otMzrGDQws",
+      authDomain: "hk-cashloans.firebaseapp.com",
+      projectId: "hk-cashloans",
+      storageBucket: "hk-cashloans.appspot.com",
+      messagingSenderId: "875050729218",
+      appId: "1:875050729218:web:11551a4a54f7bc2a950c1b",
+      measurementId: "G-W5RYFHZLK2"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    window.submitApplication = async function(event) {
+      event.preventDefault();
+      
+      const data = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        amount: document.getElementById('amount').value,
+        collateralType: document.getElementById('collateralType').value,
+        collateralDescription: document.getElementById('collateralDescription').value,
+        estimatedValue: document.getElementById('estimatedValue').value
+      };
+
+      try {
+        await addDoc(collection(db, "applications"), data);
+        alert("Application submitted successfully!");
+        document.getElementById('loanForm').reset();
+      } catch (e) {
+        console.error("Error adding document: ", e);
+        alert("Something went wrong. Please try again.");
+      }
+
+      // Optional: trigger EmailJS (needs user to insert their service and template IDs)
+      // emailjs.send("your_service_id", "your_template_id", data)
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    (function(){
+      emailjs.init("your_user_id"); // replace with your EmailJS user ID
+    })();
+  </script>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f5f5f5; margin: 0; }
+    .header { padding: 20px; background: #fff; text-align: left; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .header img { height: 60px; }
+    .container { max-width: 500px; margin: 30px auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    input, select, button { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #ccc; }
+    button { background-color: #002b5c; color: white; border: none; font-weight: bold; }
+    button:hover { background-color: #004080; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <img src="logo.png" alt="HK Cashloans Logo" />
+  </div>
+
+  <div class="container">
+    <h2>Loan Application</h2>
+    <form id="loanForm" onsubmit="submitApplication(event)">
+      <input type="text" id="name" placeholder="Full Name" required />
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="tel" id="phone" placeholder="Phone Number" required />
+      <input type="number" id="amount" placeholder="Loan Amount" required />
+      <select id="collateralType" required>
+        <option value="" disabled selected>Select Collateral Type</option>
+        <option value="vehicle">Vehicle</option>
+        <option value="property">Property</option>
+        <option value="electronics">Electronics</option>
+        <option value="other">Other</option>
+      </select>
+      <input type="text" id="collateralDescription" placeholder="Collateral Description" required />
+      <input type="number" id="estimatedValue" placeholder="Estimated Collateral Value" required />
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</body>
+</html>
